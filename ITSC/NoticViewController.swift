@@ -1,14 +1,15 @@
 //
-//  NewsViewController.swift
+//  NoticViewController.swift
 //  ITSC
 //
-//  Created by aaaabang on 2021/11/14.
+//  Created by aaaabang on 2021/11/16.
 //
 
 import UIKit
 import SwiftSoup
-class NewsViewController: UITableViewController, ContentDelegate{
-    
+
+class NoticViewController: UITableViewController, ContentDelegate {
+
     var newsList:[NewsItem] = []
     var page = 1
     var index:Int = 0//新闻列表下标
@@ -18,9 +19,9 @@ class NewsViewController: UITableViewController, ContentDelegate{
         
         var url:URL
         if page == 1{
-            url = URL(string: "https://itsc.nju.edu.cn/xwdt/list.htm")!
+            url = URL(string: "https://itsc.nju.edu.cn/tzgg/list.htm")!
         }else{
-            url = URL(string: "https://itsc.nju.edu.cn/xwdt/list\(page).htm")!
+            url = URL(string: "https://itsc.nju.edu.cn/tzgg/list\(page).htm")!
         }
             
         let task = URLSession.shared.dataTask(with: url, completionHandler: {
@@ -151,7 +152,7 @@ class NewsViewController: UITableViewController, ContentDelegate{
             tableView.deleteRows(at: [indexPath], with: .fade)
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+        }
     }
     */
 
@@ -187,5 +188,4 @@ class NewsViewController: UITableViewController, ContentDelegate{
        
     }
     
-
 }

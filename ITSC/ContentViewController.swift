@@ -7,6 +7,8 @@
 
 import UIKit
 import SwiftSoup
+import WebKit
+
 protocol ContentDelegate{
     //func showContent(item:NewsItem)
 }
@@ -14,21 +16,22 @@ protocol ContentDelegate{
 
 class ContentViewController: UIViewController {
 
-    @IBOutlet weak var _title: UILabel!
-    @IBOutlet weak var text1: UITextView!
-    @IBOutlet weak var text2: UITextView!
     
     var contentDelegate:ContentDelegate?
     var url:URL?
+    let webView = WKWebView()
+    let baseUrl = URL(string: "https://itsc.nju.edu.cn")
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        let queue = DispatchQueue(label: "com.ITSC.aaaabang")
-            queue.sync {
-                self.fetchData()
-                }
+//        let queue = DispatchQueue(label: "com.ITSC.aaaabang")
+//            queue.sync {
+//                self.fetchData()
+//                }
         // Do any additional setup after loading the view.
     }
     
+
     func fetchData() {
         let task = URLSession.shared.dataTask(with: url!, completionHandler: {
             data, response, error in
@@ -46,7 +49,8 @@ class ContentViewController: UIViewController {
                         let string = String(data: data, encoding: .utf8) {
                             
                             DispatchQueue.main.async {
-                                self.loadContent(html: string)
+                                let content = self.loadContent(html: string)//解析content段html
+                                self.webView.loadHTMLString(content, baseURL: self.baseUrl)//使用webView加载
                             }
                        
                            
@@ -55,17 +59,31 @@ class ContentViewController: UIViewController {
         task.resume()
     }
     
-    func loadContent(html:String){
+    func loadContent(html:String)->String{
         do{
+            var content:String = ""
             //解析出标题日期集合
-        let doc: Document = try SwiftSoup.parse(html)
-        let title = try doc.title()
-        //let pics: Elements = try doc.select("img[src]")
-        let texts:Element = try doc.select("div.read").first()!
+            let str = "11dadsddabc"
+                    // 1. 创建正则表达式规则
+                    let pattern = "^[a-z].*[a-z]$"
+                    
+                    // 2. 创建正则表达式对象
+                    guard let regex = try? NSRegularExpression(pattern: pattern, options: []) else {
+                        return content
+                    }
+                    
+                    // 3. 匹配字符串中内容
+                   let results =  regex.matches(in: str, options: [], range: NSRange(location: 0, length: str.count))
+                    
+                    // 4.遍历数组,获取结果[NSTextCheckingResult]
+                    
+                    for result in results {
+                        print(result.range)
+                        let string = (str as NSString).substring(with: result.range)
+                        print(string)
+                    }
         
-        self._title.text! = title
-        self.text1.text = String(try texts.text())
-            
+            return content
                  
         }catch Exception.Error(let type, let message){
             print(message)
@@ -74,11 +92,29 @@ class ContentViewController: UIViewController {
         }
 
     }
-    
-    //从url解析图片
-    func loadImage(link:URL){
-        
-    }
+//
+//    //从url解析图片
+//    func loadImage(url:URL){
+//
+//        URLSession.shared.dataTask(with: url) { (data, response, error) in
+//            if let error = error {
+//                print("\(error.localizedDescription)")
+//                return
+//            }
+//            guard let httpResponse = response as? HTTPURLResponse,
+//                  (200...299).contains(httpResponse.statusCode) else {
+//                print("server error")
+//                return
+//            }
+//            DispatchQueue.main.async {
+//                if(data == nil){
+//                    self.image.image = UIImage(named: "default.jpg")
+//                }else{
+//                    self.image.image = UIImage(data: data!)
+//                }
+//            }
+//        }.resume()
+//    }
     /*
     // MARK: - Navigation
 

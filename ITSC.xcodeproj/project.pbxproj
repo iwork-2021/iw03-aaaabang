@@ -16,6 +16,9 @@
 		631266142741EB4E007697F4 /* NewsItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631266132741EB4E007697F4 /* NewsItem.swift */; };
 		631266162741ED01007697F4 /* NewsViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631266152741ED01007697F4 /* NewsViewCell.swift */; };
 		631266182742883C007697F4 /* ContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631266172742883C007697F4 /* ContentViewController.swift */; };
+		63BD5F6E2743D11D008F5782 /* NoticViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BD5F6D2743D11D008F5782 /* NoticViewController.swift */; };
+		63BD5F702744A58E008F5782 /* SafeNoticeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BD5F6F2744A58E008F5782 /* SafeNoticeTableViewController.swift */; };
+		63BD5F722744D736008F5782 /* InfoTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BD5F712744D736008F5782 /* InfoTableViewController.swift */; };
 		F937773C9C4A36B7A3C69D79 /* Pods_ITSC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78DBA56CB44BC4ADA49825FC /* Pods_ITSC.framework */; };
 /* End PBXBuildFile section */
 
@@ -31,6 +34,9 @@
 		631266132741EB4E007697F4 /* NewsItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsItem.swift; sourceTree = "<group>"; };
 		631266152741ED01007697F4 /* NewsViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsViewCell.swift; sourceTree = "<group>"; };
 		631266172742883C007697F4 /* ContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewController.swift; sourceTree = "<group>"; };
+		63BD5F6D2743D11D008F5782 /* NoticViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticViewController.swift; sourceTree = "<group>"; };
+		63BD5F6F2744A58E008F5782 /* SafeNoticeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafeNoticeTableViewController.swift; sourceTree = "<group>"; };
+		63BD5F712744D736008F5782 /* InfoTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoTableViewController.swift; sourceTree = "<group>"; };
 		78DBA56CB44BC4ADA49825FC /* Pods_ITSC.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ITSC.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B423392799AE98D434E6B02C /* Pods-ITSC.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ITSC.debug.xcconfig"; path = "Target Support Files/Pods-ITSC/Pods-ITSC.debug.xcconfig"; sourceTree = "<group>"; };
 		E0F4C9B98C6413A199884148 /* Pods-ITSC.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ITSC.release.xcconfig"; path = "Target Support Files/Pods-ITSC/Pods-ITSC.release.xcconfig"; sourceTree = "<group>"; };
@@ -72,6 +78,9 @@
 				34EBE009271F08E2005CC9EB /* AppDelegate.swift */,
 				34EBE00B271F08E2005CC9EB /* SceneDelegate.swift */,
 				34EBE00F271F08E2005CC9EB /* Main.storyboard */,
+				63BD5F6D2743D11D008F5782 /* NoticViewController.swift */,
+				63BD5F712744D736008F5782 /* InfoTableViewController.swift */,
+				63BD5F6F2744A58E008F5782 /* SafeNoticeTableViewController.swift */,
 				631266172742883C007697F4 /* ContentViewController.swift */,
 				631266112740BBCD007697F4 /* NewsViewController.swift */,
 				631266152741ED01007697F4 /* NewsViewCell.swift */,
@@ -215,11 +224,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				63BD5F6E2743D11D008F5782 /* NoticViewController.swift in Sources */,
 				631266122740BBCD007697F4 /* NewsViewController.swift in Sources */,
 				631266142741EB4E007697F4 /* NewsItem.swift in Sources */,
+				63BD5F722744D736008F5782 /* InfoTableViewController.swift in Sources */,
 				631266162741ED01007697F4 /* NewsViewCell.swift in Sources */,
 				34EBE00A271F08E2005CC9EB /* AppDelegate.swift in Sources */,
 				631266182742883C007697F4 /* ContentViewController.swift in Sources */,
+				63BD5F702744A58E008F5782 /* SafeNoticeTableViewController.swift in Sources */,
 				34EBE00C271F08E2005CC9EB /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
