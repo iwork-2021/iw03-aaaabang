@@ -182,7 +182,7 @@ class NoticViewController: UITableViewController, ContentDelegate {
         let cell = sender as! NewsViewCell
         let item = newsList[tableView.indexPath(for: cell)!.row]
         print(item.title)
-        contentViewController.url = URL(string: "https://itsc.nju.edu.cn" + item.link)!
+        contentViewController.urlStr = item.link
         contentViewController.contentDelegate = self
         
        

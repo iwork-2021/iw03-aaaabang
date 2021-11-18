@@ -91,10 +91,7 @@ class InfoTableViewController: UITableViewController,ContentDelegate  {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let queue = DispatchQueue(label: "com.ITSC.aaaabang")
-            queue.async {
-                self.fetchData()
-                }
+    self.fetchData()
             
         
         // Uncomment the following line to preserve selection between presentations
@@ -182,7 +179,7 @@ class InfoTableViewController: UITableViewController,ContentDelegate  {
         let cell = sender as! NewsViewCell
         let item = newsList[tableView.indexPath(for: cell)!.row]
         print(item.title)
-        contentViewController.url = URL(string: "https://itsc.nju.edu.cn" + item.link)!
+        contentViewController.urlStr = item.link
         contentViewController.contentDelegate = self
         
        

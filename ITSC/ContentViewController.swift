@@ -18,16 +18,20 @@ class ContentViewController: UIViewController {
 
     
     var contentDelegate:ContentDelegate?
+    var urlStr:String?
     var url:URL?
     let webView = WKWebView()
     let baseUrl = URL(string: "https://itsc.nju.edu.cn")
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        let queue = DispatchQueue(label: "com.ITSC.aaaabang")
-//            queue.sync {
-//                self.fetchData()
-//                }
+        let tmp = (self.urlStr!.dropLast(4)) + "m.htm"
+        self.urlStr = "https://itsc.nju.edu.cn" + tmp
+        self.url = URL(string: self.urlStr!)
+        print(self.urlStr)
+        self.view = webView
+        self.fetchData()
+ 
         // Do any additional setup after loading the view.
     }
     
@@ -50,6 +54,7 @@ class ContentViewController: UIViewController {
                             
                             DispatchQueue.main.async {
                                 let content = self.loadContent(html: string)//解析content段html
+                                print(content)
                                 self.webView.loadHTMLString(content, baseURL: self.baseUrl)//使用webView加载
                             }
                        
@@ -60,37 +65,51 @@ class ContentViewController: UIViewController {
     }
     
     func loadContent(html:String)->String{
-        do{
+          do{
             var content:String = ""
-            //解析出标题日期集合
-            let str = "11dadsddabc"
-                    // 1. 创建正则表达式规则
-                    let pattern = "^[a-z].*[a-z]$"
-                    
-                    // 2. 创建正则表达式对象
-                    guard let regex = try? NSRegularExpression(pattern: pattern, options: []) else {
-                        return content
-                    }
-                    
-                    // 3. 匹配字符串中内容
-                   let results =  regex.matches(in: str, options: [], range: NSRange(location: 0, length: str.count))
-                    
-                    // 4.遍历数组,获取结果[NSTextCheckingResult]
-                    
-                    for result in results {
-                        print(result.range)
-                        let string = (str as NSString).substring(with: result.range)
-                        print(string)
-                    }
-        
-            return content
-                 
+            // 1. 创建正则表达式规则<!--End||content-->
+            let pattern = #"<!--Start\|\|Container-->(.*)<!--End\|\|Container-->"#//"<!\\-\\-Start\\|\\|content\\-\\->(.*)<!\\-\\-End\\|\\|content\\-\\->"
+
+            // 2. 创建正则表达式对象
+            guard let regex = try? NSRegularExpression(pattern: pattern, options: .dotMatchesLineSeparators) else {
+                return "failed"
+            }
+
+            // 3. 匹配字符串中内容
+           let result =  regex.firstMatch(in: html, options: [], range: NSRange(location: 0, length: html.count))
+
+            content = (html as NSString).substring(with: result!.range)
+
+
+              var head:String = ""
+              let pattern1 = #".*<!--Start\|\|Header-->"#
+              guard let regex1 = try? NSRegularExpression(pattern: pattern1, options:.dotMatchesLineSeparators) else {
+                  return "failed"
+              }
+
+              // 3. 匹配字符串中内容
+              let result1 =  regex1.firstMatch(in: html, options: [], range: NSRange(location: 0, length: html.count))
+
+              head = (html as NSString).substring(with: result1!.range)
+
+              var tail:String = ""
+              let pattern2 = #"<!--Start\|\|Footer-->(.*)"#
+              guard let regex2 = try? NSRegularExpression(pattern: pattern2, options: .dotMatchesLineSeparators) else {
+                  return "failed"
+              }
+              let result2 =  regex2.firstMatch(in: html, options: [], range: NSRange(location: 0, length: html.count))
+             tail = (html as NSString).substring(with: result2!.range)
+              content = head + content + tail
+              return content
+
+
         }catch Exception.Error(let type, let message){
             print(message)
         }catch{
             print("error")
         }
-
+        
+        return " "
     }
 //
 //    //从url解析图片
